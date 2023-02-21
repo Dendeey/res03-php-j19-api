@@ -15,7 +15,7 @@ class UserController extends AbstractController {
         // render
     }
 
-    public function getUser(array $get)
+    public function getUser(string $get)
     {
         // get the user from the manager
         // either by email or by id

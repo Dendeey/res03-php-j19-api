@@ -1,4 +1,4 @@
-username
-password
+davidsim
+83c8b946aee433563583381d62aa9c15
 db.3wa.io
-database_name
+davidsim_phpj19

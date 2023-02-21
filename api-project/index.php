@@ -21,8 +21,11 @@ catch(Exception $e)
 {
     if($e->getCode() === 404)
     {
-        require "./templates/404.phtml";
+        
     }
 }
+
+$pushUserInDatabase = new User(6, "Dendeey", "David", "Sim", "david@david.fr");
+var_dump(createUser($pushUserInDatabase));
 
 ?>
