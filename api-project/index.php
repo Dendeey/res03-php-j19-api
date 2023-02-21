@@ -25,7 +25,5 @@ catch(Exception $e)
     }
 }
 
-$pushUserInDatabase = new User(6, "Dendeey", "David", "Sim", "david@david.fr");
-var_dump(createUser($pushUserInDatabase));
 
 ?>
