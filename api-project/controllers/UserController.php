@@ -29,19 +29,20 @@ class UserController extends AbstractController {
 
     public function getUser(string $get)
     {
+        // Pour retourner une valeur entière (intval)
+        
+        $id = intval($get);
+        
         // get the user from the manager
-        
-        $getUserFromManager = $this->um->getUserById();
-        
         // either by email or by id
         
-        $getUserById = $this->um->getUserById();
+        $getUserFromManager = $this->um->getUserById($id);
         
         // render
         
-        $getUserById->toArray();
+        $userToArray = $getUserFromManager->toArray();
         
-        $this->render($getUserById);
+        $this->render($userToArray);
         
         
     }
@@ -50,34 +51,43 @@ class UserController extends AbstractController {
     {
         // create the user in the manager
         
-        $createUser = $this->um->createUser();
+        $createUser = new User($post["id"], $post["username"], $post["first_name"], $post["last_name"], $post["email"]);
+        
+        $userCreated = $this->um->createUser($createUser);
         
         // render the created user
         
-        $this->render($createUser);
+        $userToArray = $userCreated->toArray();
+        
+        $this->render($userToArray);
     }
 
     public function updateUser(array $post)
     {
         // update the user in the manager
         
-        $updateUser = $this->um->updateUser();
+        $userToUpdate = new User(intval($post['id']), $post['username'], $post['first-name'], $post['last-name'], $post['email']);
+        
+        $this->um->updateUser($userToUpdate);
+
+        $userToArray = $userToUpdate->toArray();
 
         // render the updated user
         
-        $this->render($updateUser);
+        $this->render($userToArray);
     }
 
     public function deleteUser(array $post)
     {
         // delete the user in the manager
         
-        $deleteUser = $this->um->deleteUser();
+        $this->um->deleteUser(intval($post['id']));
 
         // render the list of all users
         
-        $this->render($deleteUser);
+        $this->render(['users' => $this->um->getAllUsers()]);
     }
 }
+
 
 ?>
